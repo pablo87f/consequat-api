@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, IsNull } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
   schema: 'cadastro',
-  name: 'produtos',
+  name: 't_produtos',
   synchronize: true,
 })
 export class Produto {

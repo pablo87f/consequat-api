@@ -14,8 +14,10 @@ describe('ProdutosController', () => {
 
   describe('listar', () => {
     it('Deve retornar um array com os dois proodutos cadastrados', () => {
-      const produtoController = app.get<ProdutosController>(ProdutosController);
-      expect(produtoController.recuperarTodos()).toBe('Hello World!');
+      const produtosController = app.get<ProdutosController>(
+        ProdutosController,
+      );
+      expect(produtosController.recuperarTodos()).toBe('Hello World!');
     });
   });
 });

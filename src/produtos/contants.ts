@@ -1,1 +1,1 @@
-export const produtoRepositoryProviderKey = 'PRODUTO_REPOSITORY';
+export const produtosRepositoryProviderKey = 'PRODUTOS_REPOSITORY';

@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { produtoRepositoryProviderKey } from './contants';
+import { produtosRepositoryProviderKey } from './contants';
 import { CriarProdutoDto } from './dtos/criarProduto.dto';
 import { Produto } from './produto.entity';
 
 @Injectable()
 export class ProdutosService {
   constructor(
-    @Inject(produtoRepositoryProviderKey)
+    @Inject(produtosRepositoryProviderKey)
     private produtoRepository: Repository<Produto>,
   ) {}
 
