@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CriarProdutoDto } from './dtos/criarProduto.dto';
+import { ApiBody } from '@nestjs/swagger';
+import { CriarProdutoDto } from './dtos/criar-produto.dto';
 import { Produto } from './produto.entity';
 import { ProdutosService } from './produtos.service';
 
@@ -13,6 +14,7 @@ export class ProdutosController {
   }
 
   @Post()
+  @ApiBody({ type: CriarProdutoDto })
   async criar(@Body() criarProdutoDto: CriarProdutoDto): Promise<Produto> {
     return this.produtosService.criar(criarProdutoDto);
   }
