@@ -1,20 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProdutosController } from './produtos.controller';
-import { ProdutosService } from './produtos.service';
+import { ProductsController } from './products.controller';
+import { ProductsService } from './products.service';
 
 describe('AppController', () => {
   let app: TestingModule;
 
   beforeAll(async () => {
     app = await Test.createTestingModule({
-      controllers: [ProdutosController],
-      providers: [ProdutosService],
+      controllers: [ProductsController],
+      providers: [ProductsService],
     }).compile();
   });
 
   describe('listar', () => {
     it('Deve retornar um array com os dois proodutos cadastrados', () => {
-      const produtoController = app.get<ProdutosController>(ProdutosController);
+      const produtoController = app.get<ProductsController>(ProductsController);
       expect(produtoController.listar()).toBe('Hello World!');
     });
   });

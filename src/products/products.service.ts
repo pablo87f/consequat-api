@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Produto } from './interfaces/produtos.interface';
+import { Product } from './interfaces/products.interface';
 
 @Injectable()
-export class ProdutosService {
-  listar(): Produto[] {
+export class ProductsService {
+  listar(): Product[] {
     return [
       {
         id: 1,
