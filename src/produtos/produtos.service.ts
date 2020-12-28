@@ -1,4 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { ApiExtension } from '@nestjs/swagger';
+import { ApiError } from 'src/common/errors/api-error';
 import { Repository } from 'typeorm';
 import { produtosRepositoryProviderKey } from './contants';
 import { CriarProdutoDto } from './dtos/criar-produto.dto';
@@ -15,11 +17,25 @@ export class ProdutosService {
     return this.produtoRepository.find();
   }
 
-  async criar(criarProdutoDto: CriarProdutoDto): Promise<Produto> {
-    const produtoNovo = this.produtoRepository.create({
-      descricao: criarProdutoDto?.descricao,
-      nome: criarProdutoDto.nome,
+  async criar({ nome, descricao }: CriarProdutoDto): Promise<Produto> {
+    const produtoExistente = await this.produtoRepository.findOne({
+      where: {
+        nome: nome,
+      },
     });
+
+    if (produtoExistente)
+      throw new ApiError(
+        `Produto com nome '${nome}' já existe`,
+        409,
+        'JA_EXISTE',
+      );
+
+    const produtoNovo = this.produtoRepository.create({
+      descricao: descricao,
+      nome: nome,
+    });
+
     return await this.produtoRepository.save(produtoNovo);
   }
 }

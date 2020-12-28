@@ -8,6 +8,5 @@ export class CriarProdutoDto {
   nome: string;
 
   @ApiProperty()
-  @IsString()
   descricao?: string;
 }
