@@ -4,9 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { ProdutosModule } from './produtos/produtos.module';
+import { UnidadesMedidaModule } from './unidades-medida/unidades-medida.module';
 
 @Module({
   imports: [
+    UnidadesMedidaModule,
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true,
