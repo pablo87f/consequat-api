@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { UnidadeMedida } from 'src/unidades-medida/unidade-medida.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({
   schema: 'cadastro',
@@ -20,4 +27,8 @@ export class Produto {
 
   @Column({ default: true })
   ativo: boolean;
+
+  @ManyToOne((type) => UnidadeMedida)
+  @JoinColumn({ name: 'idUnidadeMedida' })
+  unidadeMedida: UnidadeMedida;
 }

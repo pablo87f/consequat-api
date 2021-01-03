@@ -1,6 +1,6 @@
-import { HttpStatus, Inject, Injectable } from '@nestjs/common';
-import { ApiExtension } from '@nestjs/swagger';
+import { Inject, Injectable } from '@nestjs/common';
 import { ApiError } from 'src/common/errors/api-error';
+import { UnidadeMedida } from 'src/unidades-medida/unidade-medida.entity';
 import { Repository } from 'typeorm';
 import { produtosRepositoryProviderKey } from './contants';
 import { CriarProdutoDto } from './dtos/criar-produto.dto';
@@ -17,7 +17,7 @@ export class ProdutosService {
     return this.produtoRepository.find();
   }
 
-  async criar({ nome, descricao }: CriarProdutoDto): Promise<Produto> {
+  async criar({ nome, idUnidadeMedida }: CriarProdutoDto): Promise<Produto> {
     const produtoExistente = await this.produtoRepository.findOne({
       where: {
         nome: nome,
@@ -31,9 +31,12 @@ export class ProdutosService {
         'JA_EXISTE',
       );
 
+    const unidadeMedida = new UnidadeMedida();
+    unidadeMedida.id = idUnidadeMedida;
+
     const produtoNovo = this.produtoRepository.create({
-      descricao: descricao,
-      nome: nome,
+      unidadeMedida,
+      nome,
     });
 
     return await this.produtoRepository.save(produtoNovo);
