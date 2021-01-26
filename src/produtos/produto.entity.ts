@@ -28,7 +28,7 @@ export class Produto {
   @Column({ default: true })
   ativo: boolean;
 
-  @ManyToOne((type) => UnidadeMedida)
+  @ManyToOne(() => UnidadeMedida)
   @JoinColumn({ name: 'idUnidadeMedida' })
   unidadeMedida: UnidadeMedida;
 }

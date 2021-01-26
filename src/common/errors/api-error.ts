@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { ConflictException, HttpException } from '@nestjs/common';
 
-export class ApiError extends HttpException {
-  constructor(message: string, status: HttpStatus, readonly code = '') {
-    super(message, status);
+export class ApiError extends ConflictException {
+  constructor(message: string, readonly code = '') {
+    super(message, code);
   }
 }

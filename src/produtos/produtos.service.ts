@@ -17,19 +17,19 @@ export class ProdutosService {
     return this.produtoRepository.find();
   }
 
-  async criar({ nome, idUnidadeMedida }: CriarProdutoDto): Promise<Produto> {
-    const produtoExistente = await this.produtoRepository.findOne({
+  async recuperarPorNome(nome: string): Promise<Produto> {
+    return this.produtoRepository.findOne({
       where: {
         nome: nome,
       },
     });
+  }
+
+  async criar({ nome, idUnidadeMedida }: CriarProdutoDto): Promise<Produto> {
+    const produtoExistente = await this.recuperarPorNome(nome);
 
     if (produtoExistente)
-      throw new ApiError(
-        `Produto com nome '${nome}' já existe`,
-        409,
-        'JA_EXISTE',
-      );
+      throw new ApiError(`Produto com nome '${nome}' já existe`, 'JA_EXISTE');
 
     const unidadeMedida = new UnidadeMedida();
     unidadeMedida.id = idUnidadeMedida;
