@@ -25,6 +25,13 @@ export class Produto {
   })
   descricao?: string;
 
+  @Column({
+    type: 'varchar',
+    length: 20,
+    nullable: true,
+  })
+  ean?: string;
+
   @Column({ default: true })
   ativo: boolean;
 
